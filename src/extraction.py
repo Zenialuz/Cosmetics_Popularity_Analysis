@@ -9,6 +9,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
+import os
 
 def connect_and_get_html(url):
     # ------------- Configurando Selenium -------------------------
@@ -170,3 +171,16 @@ def sraping_webSite(categorias, tipos_de_piel, zonas_aplicacion, output_csv):
             print(f"Datos exportados a {output_csv}")
         
     return output_df    
+
+def carga_csv(data_csv):
+    
+    # Verificar si el archivo CSV existe
+    if not os.path.exists(data_csv):
+        raise FileNotFoundError(f"El archivo {data_csv} no existe.")
+    
+    # Cargar el archivo CSV en un DataFrame
+    df_cosmeticos = pd.read_csv(data_csv, sep=",", encoding="utf-8")
+    print("------------------------------------------------------")
+    print(f"Se han cargado {len(df_cosmeticos)} filas del archivo CSV.")
+    print("------------------------------------------------------")
+    return df_cosmeticos

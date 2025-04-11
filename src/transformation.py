@@ -1,18 +1,4 @@
 import pandas as pd
-import os
-
-def carga_csv(data_csv):
-    
-    # Verificar si el archivo CSV existe
-    if not os.path.exists(data_csv):
-        raise FileNotFoundError(f"El archivo {data_csv} no existe.")
-    
-    # Cargar el archivo CSV en un DataFrame
-    df_cosmeticos = pd.read_csv(data_csv, sep=",", encoding="utf-8")
-    print("------------------------------------------------------")
-    print(f"Se han cargado {len(df_cosmeticos)} filas del archivo CSV.")
-    print("------------------------------------------------------")
-    return df_cosmeticos
 
 
 def limpieza_datos(df_cosmeticos):
