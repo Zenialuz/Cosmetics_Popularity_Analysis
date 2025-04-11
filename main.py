@@ -1,32 +1,10 @@
-# Importando librerías necesarias
-import undetected_chromedriver as uc
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from webdriver_manager.chrome import ChromeDriverManager
-from bs4 import BeautifulSoup
-import pandas as pd
-import time
-import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.graph_objects as go
-import plotly.express as px
-import nbformat
-import ipywidgets as widgets
-import plotly.io as pio
-import os
-import plotly.express as px
-
-
 from src.extraction import sraping_webSite, carga_csv
 from src.exploration import exploracion_data, exploracion_por_categoria
 from src.transformation import limpieza_datos
 from src.transformation import transformacion_datos
 from src.visualizacion import grafico_cajas_columna, correlacion_variables, grafico_frecuencia_marcas,grafico_proporcion_tipo_piel,grafico_densidad_columna
 from src.loadModel import cargar_df_a_staging, script_generar_mondelo_y_carga_datos,generar_modelo_a_partir_de_sql
+from src.inferencia import hipotesis_comparacion_categorias, hipotesis_correlacion_variables
 
 ###############################################
 # Configuración de variables globales
@@ -116,6 +94,10 @@ grafico_proporcion_tipo_piel(df_cosmeticos)
 grafico_densidad_columna(df_cosmeticos, "Calificacion")
 grafico_densidad_columna(df_cosmeticos, "Total_calificadores")
 grafico_densidad_columna(df_cosmeticos, "Precio_Euros")
+
+# Inferencia Estadistica
+hipotesis_comparacion_categorias(df_cosmeticos)
+hipotesis_correlacion_variables(df_cosmeticos)
 
 #Carga de datos en base de datos
 cargar_df_a_staging(nombre_bd,df_cosmeticos,nombre_tabla_staging)
