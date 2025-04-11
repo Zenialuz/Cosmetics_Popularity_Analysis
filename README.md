@@ -53,4 +53,4 @@ El programa realiza los siguientes pasos para generar el modelo estrella  y carg
 
 ### Visualización en PowerBI
 
-Las visualizaciones se realizaron en PowerBI se puede descargar el archivo en la ruta: [Visualizaciones/Análisis_productos_piel_Primor.pbix](https://github.com/Zenialuz/Cosmetics_Popularity_Analysis/tree/main/Visualizaciones  "Visualizaciones/Análisis_productos_piel_Primor.pbix")
+Las visualizaciones se realizaron en PowerBI se puede descargar el archivo en la ruta: [Visualizaciones/Análisis_productos_piel_Primor.pbix](https://github.com/Zenialuz/Cosmetics_Popularity_Analysis/tree/main/Visualizaciones/Análisis_productos_piel_Primor.pbix  "Visualizaciones/Análisis_productos_piel_Primor.pbix")
