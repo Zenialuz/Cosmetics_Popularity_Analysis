@@ -50,5 +50,7 @@ El programa realiza los siguientes pasos para generar el modelo estrella  y carg
 * Genera un archivo .sql con las instrucciones para crear las tablas, las correlaciones del modelo estrella y cargar los datos a partir de la tabla staging
 * Ejecuta el script .sql para generar el modelo estrella y cargar los datos que servirán para crear las visualizaciones en Power BI
 
+
 ### Visualización en PowerBI
-Las visualizaciones se realizaron en PowerBI se puede descargar el archivo en la ruta: Visualizaciones/[Análisis_productos_piel_Primor.pbix](https://github.com/Zenialuz/Cosmetics_Popularity_Analysis/blob/main/Visualizaciones/An%C3%A1lisis_productos_piel_Primor.pbix "Análisis_productos_piel_Primor.pbix")	
+
+Las visualizaciones se realizaron en PowerBI se puede descargar el archivo en la ruta: [Visualizaciones/Análisis_productos_piel_Primor.pbix](https://github.com/Zenialuz/Cosmetics_Popularity_Analysis/tree/main/Visualizaciones  "Visualizaciones/Análisis_productos_piel_Primor.pbix")
