@@ -35,17 +35,33 @@ def script_generar_mondelo_y_carga_datos(ruta_script_sql):
         SELECT DISTINCT Categoria AS categoria
         FROM staging_data
     ) AS t;
-
+    
+    
+    -- TABLA DE DIMENSIÓN: GRUPO TIPO DE PIEL
+    CREATE TABLE dim_grupo_tipo_piel (
+        id_grupo_tipo_piel INTEGER PRIMARY KEY,
+        grupo_tipo_piel VARCHAR(255)
+    );
+    INSERT INTO dim_grupo_tipo_piel (grupo_tipo_piel, id_grupo_tipo_piel)
+    SELECT grupo_tipo_piel, ROW_NUMBER() OVER () AS id_grupo_tipo_piel
+    FROM (
+        SELECT DISTINCT Grupo_Tipo_piel AS grupo_tipo_piel
+        FROM staging_data
+    ) AS t;
+    
     -- TABLA DE DIMENSIÓN: TIPO DE PIEL
     CREATE TABLE dim_tipo_piel (
         id_tipo_piel INTEGER PRIMARY KEY,
-        tipo_piel VARCHAR(255)
+        id_grupo_tipo_piel INTEGER,
+        tipo_piel VARCHAR(255),
+        FOREIGN KEY (id_grupo_tipo_piel) REFERENCES dim_grupo_tipo_piel(id_grupo_tipo_piel)
     );
-    INSERT INTO dim_tipo_piel (tipo_piel, id_tipo_piel)
-    SELECT tipo_piel, ROW_NUMBER() OVER () AS id_tipo_piel
+    INSERT INTO dim_tipo_piel (tipo_piel, id_tipo_piel, id_grupo_tipo_piel)
+    SELECT tipo_piel, ROW_NUMBER() OVER () AS id_tipo_piel, id_grupo_tipo_piel
     FROM (
-        SELECT DISTINCT Tipo_piel AS tipo_piel
-        FROM staging_data
+        SELECT DISTINCT st.Tipo_piel AS tipo_piel, gtp.id_grupo_tipo_piel
+        FROM staging_data AS st
+        JOIN dim_grupo_tipo_piel AS gtp ON st.Grupo_Tipo_piel = gtp.grupo_tipo_piel
     ) AS t;
 
     -- TABLA DE DIMENSIÓN: ZONA DE APLICACIÓN

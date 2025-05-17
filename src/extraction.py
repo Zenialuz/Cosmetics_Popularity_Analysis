@@ -68,7 +68,27 @@ def connect_and_get_html(url):
 
     return html
 
-def scraping_pagina(url, output_df, categoria, tipo_piel, zona_aplicacion):
+def agrupar_tipo_piel(tipo_piel):
+    # Diccionario que mapea términos similares a su grupo general
+    grupos_piel = {
+        "Seca": ["muy seca", "seca", "seca-muy seca", "normal a seca", "seca - mixta"],
+        "Grasa": ["grasa", "mixta a grasa", "grasa - mixta"],
+        "Madura": ["madura"],
+        "Normal": ["normal", "todo tipo de piel", "mixta"],
+        "Sensible": ["sensible", "atopica", "delicadas"],
+        "Deshidratada": ["deshidratada", "apagadas"]
+    }
+
+    tipo_piel = tipo_piel.lower().strip()  # Normaliza el texto de entrada
+
+    for grupo, variantes in grupos_piel.items():
+        if tipo_piel in variantes:
+            return grupo
+
+    return "desconocido"  # Si no se encuentra coincidencia
+
+        
+def scraping_pagina(url, output_df, categoria, tipo_piel, zona_aplicacion, tipo_producto):
     
     # Conectar y obtener el HTML de la página
     html = connect_and_get_html(url)
@@ -136,16 +156,20 @@ def scraping_pagina(url, output_df, categoria, tipo_piel, zona_aplicacion):
         "precio": precios_producto,
         "categoria": categorias_producto,
         "tipo_piel": tipos_piel,
-        "zona_aplicacion": zonas_aplicacion
+        "zona_aplicacion": zonas_aplicacion,
+        "tipo_producto": tipo_producto,
+        "grupo_tipo_piel": agrupar_tipo_piel(tipo_piel)
+        
     })
+    
     
     #Concatenamos los resultados de la página actual con los resultados de las páginas anteriores
     output_df = pd.concat([output_df, df], ignore_index=True)
     return output_df
 
 
-def sraping_webSite(categorias, tipos_de_piel, zonas_aplicacion, output_csv):
-    output_df = pd.DataFrame(columns=["marca", "descripcion", "calificacion", "total_calificadores", "precio", "categoria", "tipo_piel","zona_aplicacion"])
+def sraping_webSite(categorias, tipos_de_piel, zonas_aplicacion, output_csv, tipo_producto):
+    output_df = pd.DataFrame(columns=["marca", "descripcion", "calificacion", "total_calificadores", "precio", "categoria", "tipo_piel","zona_aplicacion", "tipo_producto"])
     
     
     # Recorrer las categorías y tipos de piel
@@ -162,7 +186,7 @@ def sraping_webSite(categorias, tipos_de_piel, zonas_aplicacion, output_csv):
                     url_con_parametro = f"{url_categoria}?tipo_piel={codigo}&zona_cara={codigo_zona}&p={pagina}"
                     print(f"    URL: {url_con_parametro}")
             
-                    output_df = scraping_pagina(url_con_parametro, output_df, categoria, tipo_piel, zona)
+                    output_df = scraping_pagina(url_con_parametro, output_df, categoria, tipo_piel, zona, tipo_producto)
                 
         if output_df is None or output_df.empty:
             print(f"Advertencia: No se encontraron datos para la categoría {categoria}.")
