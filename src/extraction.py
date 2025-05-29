@@ -203,6 +203,12 @@ def sraping_webSite(categorias, tipos_de_piel, zonas_aplicacion, output_csv, tip
 def write_to_csv(df: pd.DataFrame, output_csv):
     # Verifica si el archivo ya existe
     file_exists = os.path.exists(output_csv)
+    # Extraer solo la parte del path correspondiente a las carpetas (sin el archivo)
+    folder_path = os.path.dirname(output_csv)
+
+    # Crear las carpetas si no existen
+    os.makedirs(folder_path, exist_ok=True)
+
     
     # Escribe en modo append si existe, o crea nuevo si no
     df.to_csv(

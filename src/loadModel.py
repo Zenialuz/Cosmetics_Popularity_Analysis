@@ -1,6 +1,14 @@
 import sqlite3
+import os
 
 def cargar_df_a_staging(ruta_bd, df_cosmeticos, tabla_destino):
+    
+    # Extraer solo la parte del path correspondiente a las carpetas (sin el archivo)
+    folder_path = os.path.dirname(ruta_bd)
+
+    # Crear las carpetas si no existen
+    os.makedirs(folder_path, exist_ok=True)
+    
     # Conexión a la base de datos SQLite
     conexion = sqlite3.connect(ruta_bd)
 
@@ -141,6 +149,12 @@ def script_generar_mondelo_y_carga_datos(ruta_script_sql):
     JOIN dim_producto d ON r.Descripcion = d.nombre_producto;
 
     """
+     # Extraer solo la parte del path correspondiente a las carpetas (sin el archivo)
+    folder_path = os.path.dirname(ruta_script_sql)
+
+    # Crear las carpetas si no existen
+    os.makedirs(folder_path, exist_ok=True)
+    
     with open(ruta_script_sql, 'w', encoding='utf-8') as f:
         f.write(sql_script)
     
