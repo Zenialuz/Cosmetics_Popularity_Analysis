@@ -106,6 +106,7 @@ def scraping_pagina(url, output_df, categoria, tipo_piel, zona_aplicacion, tipo_
     # Listas para almacenar los datos extraídos
     marcas_producto = []
     descripciones_producto = []
+    enlaces_producto = []
     calificaciones_producto = []
     total_calificadores = []
     precios_producto = []
@@ -128,7 +129,8 @@ def scraping_pagina(url, output_df, categoria, tipo_piel, zona_aplicacion, tipo_
             marcas_producto.append(div.get_text(strip=True) if div else None)  # Extraer el texto del <div> o agregar un valor nulo si no existe
             
             # Buscar <a> con la clase específica dentro del <form>
-            a = form.find("a", class_="product-item-link inline-block text-sm leading-4")
+            a = form.find("a", class_="product-item-link")
+            enlaces_producto.append(a.get("href") if a else None)  # Extraer el enlace del <a> o agregar un valor nulo si no existe
             descripciones_producto.append(a.get_text(strip=True) if a else None)  # Extraer el texto del <a> o agregar un valor nulo si no existe
             
             # Buscar <span> con la clase específica para precios
@@ -158,7 +160,8 @@ def scraping_pagina(url, output_df, categoria, tipo_piel, zona_aplicacion, tipo_
         "tipo_piel": tipos_piel,
         "zona_aplicacion": zonas_aplicacion,
         "tipo_producto": tipo_producto,
-        "grupo_tipo_piel": agrupar_tipo_piel(tipo_piel)
+        "grupo_tipo_piel": agrupar_tipo_piel(tipo_piel),
+        "url_producto": enlaces_producto
         
     })
     
@@ -169,7 +172,7 @@ def scraping_pagina(url, output_df, categoria, tipo_piel, zona_aplicacion, tipo_
 
 
 def sraping_webSite(categorias, tipos_de_piel, zonas_aplicacion, output_csv, tipo_producto):
-    output_df = pd.DataFrame(columns=["marca", "descripcion", "calificacion", "total_calificadores", "precio", "categoria", "tipo_piel","zona_aplicacion", "tipo_producto"])
+    output_df = pd.DataFrame(columns=["marca", "descripcion", "calificacion", "total_calificadores", "precio", "categoria", "tipo_piel","zona_aplicacion", "tipo_producto", "url_producto"])
     
     
     # Recorrer las categorías y tipos de piel
@@ -191,10 +194,25 @@ def sraping_webSite(categorias, tipos_de_piel, zonas_aplicacion, output_csv, tip
         if output_df is None or output_df.empty:
             print(f"Advertencia: No se encontraron datos para la categoría {categoria}.")
         else:             
-            output_df.to_csv(output_csv, mode='w', header=True, index=False, encoding="utf-8")
-            print(f"Datos exportados a {output_csv}")
+            #output_df.to_csv(output_csv, mode='w', header=True, index=False, encoding="utf-8")
+            write_to_csv(output_df, output_csv)
+            #print(f"Datos exportados a {output_csv}")
         
-    return output_df    
+    return output_df   
+
+def write_to_csv(df: pd.DataFrame, output_csv):
+    # Verifica si el archivo ya existe
+    file_exists = os.path.exists(output_csv)
+    
+    # Escribe en modo append si existe, o crea nuevo si no
+    df.to_csv(
+        output_csv,
+        mode='a' if file_exists else 'w',    # 'a' = append, 'w' = write
+        header=not file_exists,              # solo escribe encabezado si es nuevo
+        index=False,
+        encoding="utf-8"
+    )
+    print(f"Datos exportados a {output_csv}") 
 
 def carga_csv(data_csv):
     

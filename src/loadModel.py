@@ -87,6 +87,18 @@ def script_generar_mondelo_y_carga_datos(ruta_script_sql):
         SELECT DISTINCT Descripcion AS nombre_producto
         FROM staging_data
     ) AS t;
+    
+    -- TABLA DE DIMENSIÓN: TIPO DE PRODUCTO
+    CREATE TABLE dim_tipo_producto (
+        id_tipo_producto INTEGER PRIMARY KEY,
+        tipo_producto VARCHAR(255)
+        );
+    INSERT INTO dim_tipo_producto (tipo_producto, id_tipo_producto)
+    SELECT tipo_producto, ROW_NUMBER() OVER () AS id_tipo_producto
+    FROM (
+        SELECT DISTINCT Tipo_producto AS tipo_producto
+        FROM staging_data
+    ) AS t;
 
     -- TABLA DE HECHOS: PRODUCTOS
     CREATE TABLE hechos_productos (
@@ -97,6 +109,7 @@ def script_generar_mondelo_y_carga_datos(ruta_script_sql):
         id_producto INTEGER,
         Calificacion REAL,
         Total_calificadores INTEGER,
+        Calificacion_final REAL,
         Precio_Euros REAL,
         FOREIGN KEY (id_marca) REFERENCES dim_marca(id_marca),
         FOREIGN KEY (id_categoria) REFERENCES dim_categoria(id_categoria),
@@ -108,7 +121,7 @@ def script_generar_mondelo_y_carga_datos(ruta_script_sql):
     -- INSERTAR DATOS EN LA TABLA DE HECHOS
     INSERT INTO hechos_productos (
         id_marca, id_categoria, id_tipo_piel, id_zona, id_producto,
-        Calificacion, Total_calificadores, Precio_Euros
+        Calificacion, Total_calificadores, Calificacion_final, Precio_Euros
     )
     SELECT
         m.id_marca,
@@ -118,6 +131,7 @@ def script_generar_mondelo_y_carga_datos(ruta_script_sql):
         d.id_producto,
         r.Calificacion,
         r.Total_calificadores,
+        r.Calificacion_final,
         r.Precio_Euros
     FROM staging_data r
     JOIN dim_marca m ON r.Marca = m.marca
