@@ -2,3 +2,4 @@ data/*
 images/*
 src/__pycache__/*
 src/*.pyc
+models/*

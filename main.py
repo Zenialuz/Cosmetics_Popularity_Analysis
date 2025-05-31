@@ -6,6 +6,7 @@ from src.visualizacion import grafico_cajas_columna, correlacion_variables, graf
 from src.loadModel import cargar_df_a_staging, script_generar_mondelo_y_carga_datos,generar_modelo_a_partir_de_sql
 from src.inferencia import hipotesis_comparacion_categorias, hipotesis_correlacion_variables
 from src.extraction_Skin import scrapear_imagenes_istock
+from src.skin_type_classifier import train_model
 
 ###############################################
 # Configuración de variables globales
@@ -129,3 +130,6 @@ hipotesis_correlacion_variables(df_cosmeticos)
 cargar_df_a_staging(nombre_bd,df_cosmeticos,nombre_tabla_staging)
 script_generar_mondelo_y_carga_datos(ruta_script_sql)
 generar_modelo_a_partir_de_sql(nombre_bd, ruta_script_sql)
+
+# Entrenamiento del modelo de clasificación de tipos de piel
+train_model()
