@@ -46,7 +46,7 @@ def train_model():
         class_mode='categorical',
         subset='validation'
     )
-    # Definiendo la arquitectura del modelo CNN
+    # Definiendo la arquitectura del modelo CNN(convolucional)
     model = Sequential([
         Conv2D(32, (3, 3), activation='relu', input_shape=(*IMG_SIZE, 3)),  # Capas que detectan bordes, texturas, etc.
         MaxPooling2D(2, 2),  #Reduce la dimensión y conserva las características más importantes.
@@ -72,7 +72,8 @@ def train_model():
         validation_data=val_generator,
         callbacks=[early_stop]
     )
-    # Guardar el modelo entrenado en un archivo .h5
+    # Guardar el modelo entrenado en un archivo .keras
+    # Verifica si la carpeta 'models' existe, si no, la crea
     if not os.path.exists('models'):
         os.makedirs('models')
         
@@ -87,7 +88,7 @@ def train_model():
         os.remove(CLASS_INDICES_PATH)
        
         
-    # se Guarda el índice de clases para usarlo luego
+    # se Guarda el índice de clases para usarlo luego en la predicción
     with open(CLASS_INDICES_PATH, "wb") as f:
         np.save(f, train_generator.class_indices)
 
