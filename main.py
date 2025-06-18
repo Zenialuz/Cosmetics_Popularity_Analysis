@@ -9,6 +9,8 @@ from src.extraction_Skin import scrapear_imagenes_istock
 from src.skin_type_classifier import train_model
 
 import subprocess
+import sys
+
 
 ###############################################
 # Configuración de variables globales
@@ -132,5 +134,10 @@ if __name__ == "__main__":
     # Entrenamiento del modelo de clasificación de tipos de piel
     train_model()
     
+    print("------------------------------------------------------")
+    print("El archivo mvp.py se ejecutará en Streamlit para la visualización interactiva de los datos y el modelo.")
+    print("------------------------------------------------------")
+   
+    
     # Ejecutar Streamlit
-    subprocess.run(["streamlit", "run", "src/mvp.py"])
+    subprocess.run([sys.executable, "-m", "streamlit", "run", "./src/mvp.py"])

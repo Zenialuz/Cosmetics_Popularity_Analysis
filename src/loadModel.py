@@ -120,6 +120,7 @@ def script_generar_mondelo_y_carga_datos(ruta_script_sql):
         id_tipo_piel INTEGER,
         id_zona INTEGER,
         id_producto INTEGER,
+        id_tipo_producto INTEGER,
         Calificacion REAL,
         Total_calificadores INTEGER,
         Calificacion_final REAL,
@@ -128,12 +129,13 @@ def script_generar_mondelo_y_carga_datos(ruta_script_sql):
         FOREIGN KEY (id_categoria) REFERENCES dim_categoria(id_categoria),
         FOREIGN KEY (id_tipo_piel) REFERENCES dim_tipo_piel(id_tipo_piel),
         FOREIGN KEY (id_zona) REFERENCES dim_zona_aplicacion(id_zona),
-        FOREIGN KEY (id_producto) REFERENCES dim_producto(id_producto)
+        FOREIGN KEY (id_producto) REFERENCES dim_producto(id_producto),
+        FOREIGN KEY (id_tipo_producto) REFERENCES dim_tipo_producto(id_tipo_producto)
     );
 
     -- INSERTAR DATOS EN LA TABLA DE HECHOS
     INSERT INTO hechos_productos (
-        id_marca, id_categoria, id_tipo_piel, id_zona, id_producto,
+        id_marca, id_categoria, id_tipo_piel, id_zona, id_producto, id_tipo_producto,
         Calificacion, Total_calificadores, Calificacion_final, Precio_Euros
     )
     SELECT
@@ -142,6 +144,7 @@ def script_generar_mondelo_y_carga_datos(ruta_script_sql):
         tp.id_tipo_piel,
         z.id_zona,
         d.id_producto,
+        t.id_tipo_producto,
         r.Calificacion,
         r.Total_calificadores,
         r.Calificacion_final,
@@ -151,7 +154,8 @@ def script_generar_mondelo_y_carga_datos(ruta_script_sql):
     JOIN dim_categoria c ON r.Categoria = c.categoria
     JOIN dim_tipo_piel tp ON r.Tipo_piel = tp.tipo_piel
     JOIN dim_zona_aplicacion z ON r.Zona_aplicacion = z.zona_aplicacion
-    JOIN dim_producto d ON r.Descripcion = d.nombre_producto;
+    JOIN dim_producto d ON r.Descripcion = d.nombre_producto
+    JOIN dim_tipo_producto t ON r.Tipo_producto = t.tipo_producto;
 
     """
      # Extraer solo la parte del path correspondiente a las carpetas (sin el archivo)
