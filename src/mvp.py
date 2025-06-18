@@ -1,12 +1,80 @@
 import streamlit as st
 import pandas as pd
-from src.recomendacion_productos import top10_productos, get_categoria_producto, get_tipos_producto, get_zona_aplicacion
-from src.skin_type_classifier import predict_skin_type
+from recomendacion_productos import top10_productos, get_categoria_producto, get_tipos_producto, get_zona_aplicacion
+from skin_type_classifier import predict_skin_type
 import tempfile
+from PIL import Image
+st.set_page_config(page_title="Dermabotix App", page_icon=":guardsman:", layout="wide")
 
-st.set_page_config(page_title="Skin Care App", page_icon=":guardsman:", layout="wide")
-st.title("Skin Care App")
-st.write("Welcome to the Skin Care App!")
+st.markdown(
+    """
+    <style>
+    /* Fondo general */
+    .stApp {
+        background-color: #C99357;
+        font-family: 'Segoe UI', sans-serif;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    /* Contenedor tipo tarjeta */
+    .card {
+        background-color: #E9D4BD;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Botones */
+    .stButton>button {
+        background-color: #E9D4BD;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.6rem 1.2rem;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: 0.3s ease;
+    }
+
+    .stButton>button:hover {
+        background-color: #A5D6C4;
+        color: black;
+    }
+
+    /* Títulos */
+    .stTitle, .stHeader, .stSubheader {
+        color: #6E4B24;
+        text-align: center;
+    }
+
+    /* Cajas y tablas */
+    .stSelectbox, .stFileUploader, .stTextInput, .stTextArea, .stDataFrame, .dataframe {
+        background-color: #E9D4BD !important;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    /* Ocultar footer */
+    footer {visibility: hidden;}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Cargar la imagen del logo
+logo = Image.open("Logo.png")
+
+with st.container():
+        
+    # Mostrar el logo centrado y con tamaño ajustado
+    st.image(logo, width=350, use_container_width =False)  # Ajusta el ancho a tu gusto
+    
+
+st.write("Welcome to the Dermabotix App!")
 
 # Lista desplegable de categorías
 categorias = get_categoria_producto("data/modelo_copo_nieve/modelo_copo_nieve.db")

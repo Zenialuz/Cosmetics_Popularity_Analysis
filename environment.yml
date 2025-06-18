@@ -6,15 +6,17 @@ channels:
   - https://repo.anaconda.com/pkgs/msys2
 dependencies:
   - asttokens=2.0.5=pyhd3eb1b0_0
+  - astunparse=1.6.3=py_0
   - attrs=24.3.0=py312haa95532_0
   - beautifulsoup4=4.12.3=py312haa95532_0
   - blas=1.0=mkl
   - brotli-python=1.0.9=py312h5da7b33_9
+  - bs4=4.12.3=py39hd3eb1b0_0
   - bzip2=1.0.8=h2bbff1b_6
+  - c-ares=1.19.1=h2bbff1b_0
   - ca-certificates=2025.2.25=haa95532_0
-  - certifi=2025.1.31=py312haa95532_0
+  - certifi=2025.4.26=py312haa95532_0
   - cffi=1.17.1=py312h827c3e9_1
-  - charset-normalizer=3.3.2=pyhd3eb1b0_0
   - colorama=0.4.6=py312haa95532_0
   - comm=0.2.1=py312haa95532_0
   - contourpy=1.3.1=py312h214f63a_0
@@ -24,10 +26,13 @@ dependencies:
   - expat=2.6.4=h8ddb27b_0
   - fonttools=4.55.3=py312h827c3e9_0
   - freetype=2.12.1=ha860e81_0
+  - giflib=5.2.2=h7edc060_0
+  - google-pasta=0.2.0=pyhd3eb1b0_0
+  - grpcio=1.71.0=py312hbb1fe6b_0
   - h11=0.14.0=py312haa95532_0
+  - hdf5=1.14.5=ha36df97_2
   - icc_rt=2022.1.0=h6049295_2
   - icu=73.1=h6c2663c_0
-  - idna=3.7=py312haa95532_0
   - intel-openmp=2023.1.0=h59b6b97_46320
   - ipython=8.30.0=py312haa95532_0
   - ipywidgets=8.1.5=py312haa95532_0
@@ -42,13 +47,20 @@ dependencies:
   - krb5=1.20.1=h5b6d351_0
   - lcms2=2.16=hb4a4139_0
   - lerc=4.0.0=h5da7b33_0
+  - libabseil=20250127.0=cxx17_h52369b4_0
+  - libcurl=8.12.1=h9da9810_0
   - libdeflate=1.22=h5bf469e_0
   - libffi=3.4.4=hd77b12b_1
+  - libgrpc=1.71.0=hf4237ab_0
   - libpng=1.6.39=h8cc25b3_0
   - libpq=17.4=h70ee33d_0
+  - libprotobuf=5.29.3=hac4c8cb_0
+  - libre2-11=2024.07.02=h5da7b33_0
+  - libssh2=1.11.1=h2addb87_0
   - libtiff=4.5.1=h44ae7cf_1
   - libwebp-base=1.3.2=h3d04722_1
   - lz4-c=1.9.4=h2bbff1b_1
+  - markdown=3.8=py312haa95532_0
   - matplotlib=3.10.0=py312haa95532_0
   - matplotlib-base=3.10.0=py312he19b0ae_0
   - matplotlib-inline=0.1.6=py312haa95532_0
@@ -56,12 +68,11 @@ dependencies:
   - mkl-service=2.4.0=py312h827c3e9_2
   - mkl_fft=1.3.11=py312h827c3e9_0
   - mkl_random=1.2.8=py312h0158946_0
+  - ml_dtypes=0.5.1=py312h094160a_0
   - nbformat=5.10.4=py312haa95532_0
-  - numpy-base=2.0.1=py312h4dde369_1
   - openjpeg=2.5.2=hae555c5_0
   - openssl=3.0.16=h3f729d1_0
   - outcome=1.3.0=py312haa95532_0
-  - packaging=24.2=py312haa95532_0
   - parso=0.8.4=py312haa95532_0
   - pillow=11.1.0=py312h096bfcc_0
   - pip=25.0=py312haa95532_0
@@ -71,7 +82,6 @@ dependencies:
   - prompt_toolkit=3.0.43=hd3eb1b0_0
   - pure_eval=0.2.2=pyhd3eb1b0_0
   - pycparser=2.21=pyhd3eb1b0_0
-  - pygments=2.15.1=py312haa95532_1
   - pyparsing=3.2.0=py312haa95532_0
   - pyqt=6.7.1=py312h5da7b33_0
   - pyqt6-sip=13.9.1=py312h827c3e9_0
@@ -86,6 +96,7 @@ dependencies:
   - qttools=6.7.3=h0de5f00_0
   - qtwebchannel=6.7.3=h5da7b33_0
   - qtwebsockets=6.7.3=h5da7b33_0
+  - re2=2024.07.02=h214f63a_0
   - referencing=0.30.2=py312haa95532_0
   - requests=2.32.3=py312haa95532_1
   - rpds-py=0.22.3=py312h636fa0f_0
@@ -93,9 +104,8 @@ dependencies:
   - scipy=1.15.2=py312h9d85e7c_1
   - seaborn=0.13.2=py312haa95532_2
   - selenium=4.24.0=py312hefb1915_0
-  - setuptools=75.8.0=py312haa95532_0
   - sip=6.10.0=py312h5da7b33_0
-  - six=1.16.0=pyhd3eb1b0_1
+  - snappy=1.2.1=hcdb6601_0
   - sniffio=1.3.0=py312haa95532_0
   - sortedcontainers=2.4.0=pyhd3eb1b0_0
   - soupsieve=2.5=py312haa95532_0
@@ -103,19 +113,21 @@ dependencies:
   - stack_data=0.2.0=pyhd3eb1b0_0
   - tbb=2021.8.0=h59b6b97_0
   - tenacity=9.0.0=py312haa95532_0
+  - tensorboard=2.18.0=py312haa95532_0
+  - tensorflow=2.18.1=cpu_py312h6605a60_0
+  - tensorflow-base=2.18.1=cpu_py312h1ab519a_0
   - threadpoolctl=3.5.0=py312hfc267ef_0
   - tk=8.6.14=h0416ee5_0
   - tornado=6.4.2=py312h827c3e9_0
   - traitlets=5.14.3=py312haa95532_0
   - trio=0.26.2=py312haa95532_0
   - trio-websocket=0.12.2=py312haa95532_0
-  - typing_extensions=4.12.2=py312haa95532_0
   - unicodedata2=15.1.0=py312h827c3e9_1
-  - urllib3=2.3.0=py312haa95532_0
   - vc=14.42=haa95532_4
   - vs2015_runtime=14.42.34433=he0abc0d_4
   - wcwidth=0.2.5=pyhd3eb1b0_0
   - websocket-client=1.8.0=py312haa95532_0
+  - werkzeug=3.1.3=py312haa95532_0
   - wheel=0.45.1=py312haa95532_0
   - widgetsnbextension=4.0.13=py312haa95532_0
   - win_inet_pton=1.1.0=py312haa95532_0
@@ -124,12 +136,52 @@ dependencies:
   - zlib=1.2.13=h8cc25b3_1
   - zstd=1.5.6=h8880b57_0
   - pip:
-      - numpy==2.2.4
+      - absl-py==2.3.0
+      - altair==5.5.0
+      - blinker==1.9.0
+      - cachetools==5.5.2
+      - charset-normalizer==3.4.2
+      - click==8.2.0
+      - flatbuffers==25.2.10
+      - gast==0.6.0
+      - gitdb==4.0.12
+      - gitpython==3.1.44
+      - h5py==3.13.0
+      - idna==3.10
+      - jinja2==3.1.6
+      - keras==3.10.0
+      - libclang==18.1.1
+      - markdown-it-py==3.0.0
+      - markupsafe==3.0.2
+      - mdurl==0.1.2
+      - namex==0.1.0
+      - narwhals==1.38.2
+      - numpy==2.0.2
+      - opt-einsum==3.4.0
+      - optree==0.16.0
+      - packaging==25.0
       - pandas==2.2.3
+      - protobuf==5.29.5
+      - pyarrow==20.0.0
+      - pydeck==0.9.1
+      - pygments==2.19.1
       - python-dotenv==1.1.0
       - pytz==2025.2
+      - rich==14.0.0
+      - setuptools==80.9.0
+      - six==1.17.0
+      - smmap==5.0.2
+      - streamlit==1.45.0
+      - tensorboard-data-server==0.7.2
+      - termcolor==3.1.0
+      - toml==0.10.2
+      - typing-extensions==4.13.2
       - tzdata==2025.2
       - undetected-chromedriver==3.5.5
+      - urljoin==1.0.0
+      - urllib3==2.4.0
+      - watchdog==6.0.0
       - webdriver-manager==4.0.2
       - websockets==15.0.1
+      - wrapt==1.17.2
 prefix: C:\Users\LENOVO\miniconda3\envs\Analisis_Cosmeticos

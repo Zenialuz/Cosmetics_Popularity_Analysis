@@ -12,6 +12,8 @@ Analysis of Popularity and Usage of Cosmetic Products
 
 * Crear un enviromnent en base al archivo environment.yml con el siguiente comando:
 	* `conda env create -f environment.yml -n Analisis_Cosmeticos`
+* (Opcional) Tambien se pueden instalar las dependencias usando el archivo requirements.txt con el siguiente comando:
+	* `pip install -r requirements.txt`
 * Activar el entorno con el comando:
 	* `conda activate Analisis_Cosmeticos`
 * Antes de ejecutar revisar las variables globales de rutas de exportación de archivos scripts y base de datos en el archivo mai.py

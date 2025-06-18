@@ -9,6 +9,11 @@ def cargar_df_a_staging(ruta_bd, df_cosmeticos, tabla_destino):
     # Crear las carpetas si no existen
     os.makedirs(folder_path, exist_ok=True)
     
+    # Validar si la base de datos ya existe la eliminará
+    if os.path.exists(ruta_bd): 
+        os.remove(ruta_bd)
+        print(f"Base de datos {ruta_bd} eliminada porque ya existía.")
+    
     # Conexión a la base de datos SQLite
     conexion = sqlite3.connect(ruta_bd)
 
@@ -162,6 +167,10 @@ def script_generar_mondelo_y_carga_datos(ruta_script_sql):
     
     
 def generar_modelo_a_partir_de_sql(ruta_bd, ruta_script_sql):
+    
+    # validamos si existe la base de datos
+    
+    
     # Conexión a la base de datos SQLite
     conexion = sqlite3.connect(ruta_bd)
     with open(ruta_script_sql, 'r', encoding='utf-8') as f:
